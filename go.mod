@@ -1,6 +1,6 @@
 module github.com/kevinnaserwan/bank_api
 
-go 1.22.1
+go 1.20
 
 require (
 	github.com/jackc/pgx/v5 v5.6.0
