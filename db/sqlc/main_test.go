@@ -16,16 +16,18 @@ const (
 )
 
 var testQueries *Queries
+var testDB *pgxpool.Pool
 
 func TestMain(m *testing.M) {
+	var err error
 	ctx := context.Background()
-	conn, err := pgxpool.New(ctx, dbSource)
+	testDB, err = pgxpool.New(ctx, dbSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
-	defer conn.Close()
+	defer testDB.Close()
 
-	testQueries = New(conn)
+	testQueries = New(testDB)
 
 	os.Exit(m.Run())
 }
