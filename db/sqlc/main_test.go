@@ -7,12 +7,8 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/kevinnaserwan/bank_api/util"
 	_ "github.com/lib/pq"
-)
-
-const (
-	dbDriver = "pgx" // Not used directly anymore
-	dbSource = "postgresql://root:password@localhost:5433/simple_bank?sslmode=disable"
 )
 
 var testQueries *Queries
@@ -20,8 +16,13 @@ var testDB *pgxpool.Pool
 
 func TestMain(m *testing.M) {
 	var err error
+	config, err := util.LoadConfig(".")
+	if err != nil {
+		log.Fatal("cannot load config:", err)
+	}
+
 	ctx := context.Background()
-	testDB, err = pgxpool.New(ctx, dbSource)
+	testDB, err = pgxpool.New(ctx, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
