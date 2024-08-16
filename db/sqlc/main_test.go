@@ -16,7 +16,7 @@ var testDB *pgxpool.Pool
 
 func TestMain(m *testing.M) {
 	var err error
-	config, err := util.LoadConfig(".")
+	config, err := util.LoadConfig("../..")
 	if err != nil {
 		log.Fatal("cannot load config:", err)
 	}
