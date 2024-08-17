@@ -7,4 +7,5 @@ sql:
       go:
         package: "db"
         out: "db/sqlc"
+        emit_interface: true
         sql_package: "pgx/v5"
